@@ -2,16 +2,17 @@
 #define HEX_H
 
 #include <stddef.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 int
-hex_encode (const char *buffer, size_t buffer_len, char *string, size_t *string_len);
+hex_encode (const uint8_t *buffer, size_t buffer_len, char *string, size_t *string_len);
 
 int
-hex_decode (const char *string, size_t string_len, char *buffer, size_t *buffer_len);
+hex_decode (const char *string, size_t string_len, uint8_t *buffer, size_t *buffer_len);
 
 #ifdef __cplusplus
 }
