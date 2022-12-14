@@ -7,11 +7,11 @@
   { \
     size_t string_len = strlen(string); \
     size_t buffer_len = string_len; \
-    char buffer[buffer_len]; \
+    uint8_t buffer[buffer_len]; \
     int err = hex_decode(string, string_len, buffer, &buffer_len); \
     assert(err == 0); \
     assert(buffer_len == strlen(expected)); \
-    assert(strncmp(buffer, expected, buffer_len) == 0); \
+    assert(strncmp((char *) buffer, expected, buffer_len) == 0); \
   };
 
 int
