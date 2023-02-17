@@ -12,7 +12,7 @@ foreach(test IN LISTS tests)
   target_link_libraries(
     ${test}
     PRIVATE
-      hex_shared
+      hex_static
   )
 
   target_include_directories(
@@ -25,5 +25,11 @@ foreach(test IN LISTS tests)
     NAME ${test}
     COMMAND ${test}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+  )
+
+  set_tests_properties(
+    ${test}
+    PROPERTIES
+    TIMEOUT 30000
   )
 endforeach()
