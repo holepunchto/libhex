@@ -17,7 +17,7 @@ hex_encode (const uint8_t *buffer, size_t buffer_len, char *string, size_t *stri
     return 0;
   }
 
-  if (*string_len < len + 1) return -1;
+  if (*string_len < len) return -1;
 
   bool terminate = *string_len > len;
 
