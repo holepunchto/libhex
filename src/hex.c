@@ -1,4 +1,7 @@
 #include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #include "../include/hex.h"
 
@@ -17,6 +20,8 @@ hex_encode (const uint8_t *buffer, size_t buffer_len, char *string, size_t *stri
 
   if (*string_len < len + 1) return -1;
 
+  bool terminate = *string_len > len;
+
   *string_len = len;
 
   size_t k = 0;
@@ -26,7 +31,7 @@ hex_encode (const uint8_t *buffer, size_t buffer_len, char *string, size_t *stri
     string[k++] = hex_alphabet[buffer[i] & 0x0f];
   }
 
-  string[k] = '\0';
+  if (terminate) string[k] = '\0';
 
   return 0;
 }
