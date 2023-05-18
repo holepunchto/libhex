@@ -40,6 +40,7 @@ set_target_properties(
   hex_static
   PROPERTIES
   OUTPUT_NAME hex
+  PREFIX lib
 )
 
 install(TARGETS hex_shared hex_static)
