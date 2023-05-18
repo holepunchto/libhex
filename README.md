@@ -8,4 +8,4 @@ See [`include/hex.h`](include/hex.h) for the public API.
 
 ## License
 
-ISC
+Apache-2.0
