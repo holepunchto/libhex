@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.22)
 
 project(hex C)
 
+if(NOT TARGET utf)
+  add_subdirectory(vendor/libutf EXCLUDE_FROM_ALL)
+endif()
+
 add_library(hex OBJECT)
 
 set_target_properties(
@@ -23,6 +27,7 @@ target_include_directories(
   hex
   PUBLIC
     include
+    $<TARGET_PROPERTY:utf,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
 add_library(hex_shared SHARED $<TARGET_OBJECTS:hex>)

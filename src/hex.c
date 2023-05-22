@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <utf.h>
 
 #include "../include/hex.h"
 
@@ -9,7 +10,7 @@ static const char hex_alphabet[16] = "0123456789abcdef";
 static const char hex_inverse_alphabet[256] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
 int
-hex_encode (const uint8_t *buffer, size_t buffer_len, char *string, size_t *string_len) {
+hex_encode (const uint8_t *buffer, size_t buffer_len, utf8_t *string, size_t *string_len) {
   size_t len = buffer_len * 2;
 
   if (string == NULL) {
@@ -36,7 +37,7 @@ hex_encode (const uint8_t *buffer, size_t buffer_len, char *string, size_t *stri
 }
 
 int
-hex_decode (const char *string, size_t string_len, uint8_t *buffer, size_t *buffer_len) {
+hex_decode (const utf8_t *string, size_t string_len, uint8_t *buffer, size_t *buffer_len) {
   size_t len = string_len >> 1;
 
   if (buffer == NULL) {
