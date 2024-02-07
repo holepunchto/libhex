@@ -30,13 +30,19 @@ target_include_directories(
     $<TARGET_PROPERTY:utf,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
-add_library(hex_shared SHARED $<TARGET_OBJECTS:hex>)
+add_library(hex_shared SHARED)
 
 set_target_properties(
   hex_shared
   PROPERTIES
   OUTPUT_NAME hex
   WINDOWS_EXPORT_ALL_SYMBOLS ON
+)
+
+target_link_libraries(
+  hex_shared
+  PUBLIC
+    hex
 )
 
 add_library(hex_static STATIC $<TARGET_OBJECTS:hex>)
@@ -48,11 +54,18 @@ set_target_properties(
   PREFIX lib
 )
 
+target_link_libraries(
+  hex_static
+  PUBLIC
+    hex
+)
+
 install(TARGETS hex_shared hex_static)
 
 install(FILES include/hex.h DESTINATION include)
 
 if(PROJECT_IS_TOP_LEVEL)
   enable_testing()
+
   add_subdirectory(test)
 endif()
