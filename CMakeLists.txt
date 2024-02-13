@@ -45,7 +45,7 @@ target_link_libraries(
     hex
 )
 
-add_library(hex_static STATIC $<TARGET_OBJECTS:hex>)
+add_library(hex_static STATIC)
 
 set_target_properties(
   hex_static
