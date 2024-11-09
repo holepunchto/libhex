@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "libhex",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holepunchto/libhex.git"
+  },
+  "author": "Holepunch",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/holepunchto/libhex/issues"
+  },
+  "homepage": "https://github.com/holepunchto/libhex#readme",
+  "dependencies": {
+    "cmake-fetch": "^1.0.0"
+  }
+}

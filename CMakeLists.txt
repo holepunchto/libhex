@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.25)
+
+find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
 
 project(hex C)
 
-if(NOT TARGET utf)
-  add_subdirectory(vendor/libutf EXCLUDE_FROM_ALL)
-endif()
+fetch_package("github:holepunchto/libutf")
 
 add_library(hex OBJECT)
 
