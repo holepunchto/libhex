@@ -8,13 +8,13 @@
   { \
     size_t string_len = strlen(string); \
     size_t buffer_len = 0; \
-    int err = hex_decode((utf8_t *) string, string_len, NULL, &buffer_len); \
+    int err = hex_decode_utf8((utf8_t *) string, string_len, NULL, &buffer_len); \
     assert(err == 0); \
     assert(buffer_len == expected); \
   };
 
 int
-main () {
+main() {
   test_decode_length("61", 1);
   test_decode_length("6162", 2);
   test_decode_length("616263", 3);
