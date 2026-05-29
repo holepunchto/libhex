@@ -70,6 +70,8 @@ hex__encode_utf16le(const uint8_t *buffer, size_t buffer_len, utf16_t *string, s
 
 static inline int
 hex__decode_utf8(const utf8_t *string, size_t string_len, uint8_t *buffer, size_t *buffer_len) {
+  if (string_len & 1) return -1;
+
   size_t len = string_len >> 1;
 
   if (buffer == NULL) {
@@ -87,7 +89,7 @@ hex__decode_utf8(const utf8_t *string, size_t string_len, uint8_t *buffer, size_
     char chunk[2];
 
     for (size_t j = 0; j < 2; j++) {
-      chunk[j] = i + j < n ? hex__inverse_alphabet[string[i + j]] : 0;
+      chunk[j] = hex__inverse_alphabet[string[i + j]];
 
       if (chunk[j] == (char) -1) return -1;
     }
@@ -100,6 +102,8 @@ hex__decode_utf8(const utf8_t *string, size_t string_len, uint8_t *buffer, size_
 
 static inline int
 hex__decode_utf16le(const utf16_t *string, size_t string_len, uint8_t *buffer, size_t *buffer_len) {
+  if (string_len & 1) return -1;
+
   size_t len = string_len >> 1;
 
   if (buffer == NULL) {
@@ -117,7 +121,11 @@ hex__decode_utf16le(const utf16_t *string, size_t string_len, uint8_t *buffer, s
     char chunk[2];
 
     for (size_t j = 0; j < 2; j++) {
-      chunk[j] = i + j < n ? hex__inverse_alphabet[string[i + j]] : 0;
+      utf16_t unit = string[i + j];
+
+      if (unit > 0xff) return -1;
+
+      chunk[j] = hex__inverse_alphabet[unit];
 
       if (chunk[j] == (char) -1) return -1;
     }
