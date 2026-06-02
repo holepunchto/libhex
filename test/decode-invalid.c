@@ -25,14 +25,13 @@ int
 main() {
   test_decode_invalid_utf8("v");
 
-  // Odd-length input must be rejected (previously overflowed the buffer).
+  // Odd-length input must be rejected
   test_decode_invalid_utf8("abc");
 
   utf16_t odd[3] = {'a', 'b', 'c'};
   test_decode_invalid_utf16le(odd, 3);
 
-  // UTF-16 code units > 0xff must be rejected (previously read past the
-  // 256-entry lookup table).
+  // UTF-16 code units > 0xff must be rejected
   utf16_t high[2] = {'6', 0x20ac};
   test_decode_invalid_utf16le(high, 2);
 }
