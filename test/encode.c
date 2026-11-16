@@ -2,7 +2,7 @@
 #include <string.h>
 #include <utf.h>
 
-#include "../include/hex.h"
+#include <hex.h>
 
 #define test_encode(buffer, expected) \
   { \

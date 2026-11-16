@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../../include/hex.h"
+#include <hex.h>
 
 int
 LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
