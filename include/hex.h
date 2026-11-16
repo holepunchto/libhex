@@ -6,6 +6,20 @@
 #include <stdint.h>
 #include <utf.h>
 
+#if defined(_WIN32)
+#if defined(HEX_BUILDING)
+#define HEX_EXPORT __declspec(dllexport)
+#elif defined(HEX_SHARED)
+#define HEX_EXPORT __declspec(dllimport)
+#else
+#define HEX_EXPORT
+#endif
+#elif defined(__GNUC__)
+#define HEX_EXPORT __attribute__((visibility("default")))
+#else
+#define HEX_EXPORT
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -136,22 +150,22 @@ hex__decode_utf16le(const utf16_t *string, size_t string_len, uint8_t *buffer, s
   return 0;
 }
 
-inline int
+HEX_EXPORT inline int
 hex_encode_utf8(const uint8_t *buffer, size_t buffer_len, utf8_t *string, size_t *string_len) {
   return hex__encode_utf8(buffer, buffer_len, string, string_len);
 }
 
-inline int
+HEX_EXPORT inline int
 hex_decode_utf8(const utf8_t *string, size_t string_len, uint8_t *buffer, size_t *buffer_len) {
   return hex__decode_utf8(string, string_len, buffer, buffer_len);
 }
 
-inline int
+HEX_EXPORT inline int
 hex_encode_utf16le(const uint8_t *buffer, size_t buffer_len, utf16_t *string, size_t *string_len) {
   return hex__encode_utf16le(buffer, buffer_len, string, string_len);
 }
 
-inline int
+HEX_EXPORT inline int
 hex_decode_utf16le(const utf16_t *string, size_t string_len, uint8_t *buffer, size_t *buffer_len) {
   return hex__decode_utf16le(string, string_len, buffer, buffer_len);
 }

@@ -1,18 +1,9 @@
-list(APPEND fuzzers
-  encode/utf8
-  encode/utf16le
-  decode/utf8
-  decode/utf16le
+add_fuzz_executables(
+  encode/utf8.c
+  encode/utf16le.c
+  decode/utf8.c
+  decode/utf16le.c
+  PREFIX fuzz_
+  LINK
+    hex::static
 )
-
-foreach(fuzzer IN LISTS fuzzers)
-  string(REPLACE "/" "_" name ${fuzzer})
-
-  add_fuzzer(fuzz_${name} ${fuzzer}.c)
-
-  target_link_libraries(
-    fuzz_${name}
-    PRIVATE
-      hex_static
-  )
-endforeach()
