@@ -1,9 +1,3 @@
-if(TARGET hex_shared)
-  set(library hex::shared)
-else()
-  set(library hex::static)
-endif()
-
 add_test_executables(
   decode.c
   decode-invalid.c
@@ -11,7 +5,7 @@ add_test_executables(
   encode.c
   encode-length.c
   LINK
-    ${library}
+    hex::<TYPE>
 )
 
 add_subdirectory(fuzz)
